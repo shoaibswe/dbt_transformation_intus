@@ -1,0 +1,7 @@
+*/__pycache__
+*.log
+*.pyc
+.vscode/
+dbt-venv/
+dbt-env/
+.DS_Store
