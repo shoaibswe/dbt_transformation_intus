@@ -1,23 +1,19 @@
 #!/usr/bin/bash
 
-# Define colours to help with readability
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 BLUE='\033[0;34m'
 RESET='\033[0m'
 
-# Check if Python is installed
 if ! command -v python3 &> /dev/null; then
     echo "Python3 not found, installing..."
     sudo apt update
     sudo apt install -y python3
 fi
 
-# Check the version of the current Python installation
 python_version=$(python3 -c 'import platform; print(platform.python_version())')
 echo -e "${GREEN}Python version: ${python_version}${RESET}"
 
-# Select major and minor versions
 major=$(echo $python_version | cut -d'.' -f1)
 minor=$(echo $python_version | cut -d'.' -f2)
 
@@ -26,15 +22,15 @@ if (( $major < 3 || $minor < 12 )); then
     return 1
 fi
 
-# Check for virtual environment
+# Checking for virtual environment
 if [ ! -d "dbt-venv" ]; then
     python3.12 -m venv dbt-venv
 fi
 
-# Activate virtual environment
+# Activate v
 source ./dbt-venv/bin/activate
 
-# Install required packages
+# Installing our packages
 if [ -f "requirements.txt" ]; then
     echo -e "${GREEN}Installing required libraries...${RESET}"
     pip install -r requirements.txt
@@ -42,11 +38,11 @@ else
     echo -e "${RED}[!] requirements.txt not found, please create it & specify packages required.${RESET}"
 fi
 
-# Check if profiles.yml already exists
+# Checking if profiles already exists or not for Intus user
 if [ ! -f ~/.dbt/profiles.yml ]; then
   mkdir -p ~/.dbt/
 
-  # Prompt user for Redshift database details
+  # Prompts me for Redshift database details
   echo -e "${GREEN}Enter your Redshift host:${RESET}"
   read rs_host
   
@@ -63,7 +59,7 @@ if [ ! -f ~/.dbt/profiles.yml ]; then
   read rs_port
   rs_port=${rs_port:-5439}
 
-  # Create profiles.yml file with user input
+  # Creating profiles with input
   cat > ~/.dbt/profiles.yml << EOL
 
 dbt_redshift:
