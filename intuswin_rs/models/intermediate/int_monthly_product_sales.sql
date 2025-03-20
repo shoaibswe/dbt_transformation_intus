@@ -1,5 +1,3 @@
-{{ config(materialized='table') }}
-
 WITH stg_sales AS (
     SELECT *
     FROM {{ ref('int_monthly_sales_metrics') }}

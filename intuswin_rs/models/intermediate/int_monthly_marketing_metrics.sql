@@ -1,5 +1,3 @@
-{{ config(materialized='table') }}
-
 WITH stg_marketing AS (
     SELECT *
     FROM {{ ref('stg_intus_marketing_events') }}
