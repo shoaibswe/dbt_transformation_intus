@@ -1,5 +1,5 @@
 {{ config(
-    materialized='incremental',
+    materialized='incremental', --made it incremental for better performance
     unique_key='transaction_id',
     incremental_strategy='insert_overwrite'
 ) }}
