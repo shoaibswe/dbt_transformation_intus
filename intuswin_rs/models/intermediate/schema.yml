@@ -15,30 +15,41 @@ models:
         data_type: integer
         tests:
           - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
       - name: product_id
         description: "The unique identifier for the product associated with the transaction."
         data_type: integer
         tests:
           - not_null
+          - relationships:
+              to: ref('stg_intus_product_catalogs')
+              field: product_id
 
       - name: unique_customers
         description: "The number of unique customers who made transactions in the given month."
         data_type: integer
         tests:
           - not_null
+          - non_negative:
+              severity: warn
 
       - name: total_revenue
         description: "The total revenue generated from transactions in the given month."
         data_type: float
         tests:
           - not_null
+          - non_negative:
+              severity: warn
 
       - name: total_cost
         description: "The total cost associated with transactions in the given month."
         data_type: float
         tests:
           - not_null
+          - non_negative:
+              severity: warn
 
   - name: int_monthly_marketing_metrics
     description: "Aggregates marketing event data at the monthly level, including total marketing cost and total marketing events."
@@ -54,24 +65,33 @@ models:
         data_type: integer
         tests:
           - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
       - name: user_id
         description: "The unique identifier for the user associated with the marketing event."
         data_type: integer
         tests:
           - not_null
+          - relationships:
+              to: ref('stg_intus_marketing_events')
+              field: user_id
 
       - name: total_marketing_cost
         description: "The total cost of marketing events in the given month."
         data_type: float
         tests:
           - not_null
+          - non_negative:
+              severity: warn
 
       - name: total_marketing_events
         description: "The total number of marketing events in the given month."
         data_type: integer
         tests:
           - not_null
+          - non_negative:
+              severity: warn
 
   - name: int_monthly_product_sales
     description: "Joins monthly sales metrics with product catalog data to provide sales metrics by product category."
@@ -87,6 +107,8 @@ models:
         data_type: integer
         tests:
           - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
       - name: category
         description: "The category of the product associated with the transaction."
@@ -99,16 +121,21 @@ models:
         data_type: integer
         tests:
           - not_null
+          - non_negative:
+              severity: warn
 
       - name: total_revenue
         description: "The total revenue generated from transactions in the given month and category."
         data_type: float
         tests:
           - not_null
+          - non_negative:
+              severity: warn
 
       - name: total_cost
         description: "The total cost associated with transactions in the given month and category."
         data_type: float
         tests:
           - not_null
-          
+          - non_negative:
+              severity: warn
