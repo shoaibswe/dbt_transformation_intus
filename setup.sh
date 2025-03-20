@@ -28,7 +28,8 @@ if [ ! -d "dbt-venv" ]; then
 fi
 
 # Activate v
-source ./dbt-venv/bin/activate
+# source ./dbt-venv/bin/activate --turn it on if run in Mac
+source ./dbt-venv/Source/activate
 
 # Installing our packages
 if [ -f "requirements.txt" ]; then
