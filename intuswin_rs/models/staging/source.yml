@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: intus
+    database: RAW
+    schema: intus
+    tables:
+      - name: marketing_events
+      - name: sales_transactions
+      - name: product_catalog
+    
