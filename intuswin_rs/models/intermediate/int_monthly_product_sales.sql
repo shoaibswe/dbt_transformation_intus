@@ -8,11 +8,13 @@ stg_products AS (
 )
 
 SELECT
-    s.year AS transaction_year,
-    s.month AS transaction_month,
-    p.category,
-    s.unique_customers,
-    s.total_revenue,
-    s.total_cost
-FROM stg_sales s
-LEFT JOIN stg_products p ON s.product_id = p.product_id
+    sales.year AS transaction_year,
+    sales.month AS transaction_month,
+    prod.category,
+    sales.unique_customers,
+    sales.total_revenue,
+    sales.total_cost
+FROM stg_sales sales
+LEFT JOIN stg_products prod 
+    ON sales.product_id = prod.product_id
+    
