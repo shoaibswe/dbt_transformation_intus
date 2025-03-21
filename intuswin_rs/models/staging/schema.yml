@@ -48,7 +48,7 @@ models:
           - not_null
 
 
-  - name: stg_intus_product_calatogs
+  - name: stg_intus_product_catalogs
     description: "This model extracts product catalog data from the source table."
     columns:
       - name: product_id
