@@ -17,4 +17,4 @@ SELECT
 FROM stg_sales sales
 LEFT JOIN stg_products prod 
     ON sales.product_id = prod.product_id
-    
+WHERE sales.total_revenue > 0

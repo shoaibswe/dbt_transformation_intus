@@ -6,7 +6,7 @@ WITH stg_marketing AS (
 SELECT
     {{ extract_year_month('event_timestamp') }},
     user_id,
-    SUM(cost) AS total_marketing_cost,
-    COUNT(event_id) AS total_marketing_events
+    COALESCE(SUM(cost),0) AS total_marketing_cost,
+    COALESCE(COUNT(event_id),0) AS total_marketing_events
 FROM stg_marketing
 GROUP BY 1, 2
