@@ -137,6 +137,8 @@ dbt docs serve
 ##### Tests:
 - Refer to the `tests/README.md` for details on data quality tests.
 
+##### Reporting:
+- Please refer to the document `reporting/README.md` for details on mart model.
 
 ### **Contributing tot he Repo**
 - Contributions to this project are welcome! Please follow these steps:
