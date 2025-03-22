@@ -1,0 +1,117 @@
+version: 2
+
+models:
+  - name: stg_intus_marketing_events
+    description: "This model extracts marketing event data from the source table."
+    columns:
+      - name: event_id
+        description: "The unique identifier for the marketing event."
+        data_type: integer
+        tests:
+          - unique
+          - not_null
+
+      - name: user_id
+        description: "The unique identifier for the user associated with the event."
+        data_type: integer
+        tests:
+          - not_null
+
+      - name: event_type
+        description: "The type of marketing event (e.g., click, impression, conversion)."
+        data_type: string
+        tests:
+          - not_null
+
+      - name: event_timestamp
+        description: "The timestamp when the event occurred."
+        data_type: timestamp
+        tests:
+          - not_null
+
+      - name: channel
+        description: "The marketing channel associated with the event (e.g., email, social media)."
+        data_type: string
+        tests:
+          - not_null
+
+      - name: campaign
+        description: "The marketing campaign associated with the event."
+        data_type: string
+        tests:
+          - not_null
+
+      - name: cost
+        description: "The cost associated with the marketing event."
+        data_type: float
+        tests:
+          - not_null
+
+
+  - name: stg_intus_product_catalogs
+    description: "This model extracts product catalog data from the source table."
+    columns:
+      - name: product_id
+        description: "The unique identifier for the product."
+        data_type: integer
+        tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        description: "The name of the product."
+        data_type: string
+        tests:
+          - not_null
+
+      - name: category
+        description: "The category of the product."
+        data_type: string
+        tests:
+          - not_null
+
+
+  - name: stg_intus_sales_transactions
+    description: "This model incrementally loads sales transaction data from the source table."
+    config:
+      materialized: incremental
+      unique_key: transaction_id
+      incremental_strategy: insert_overwrite
+    columns:
+      - name: transaction_id
+        description: "The unique identifier for the sales transaction."
+        data_type: integer
+        tests:
+          - unique
+          - not_null
+
+      - name: product_id
+        description: "The unique identifier for the product associated with the transaction."
+        data_type: integer
+        tests:
+          - not_null
+
+      - name: user_id
+        description: "The unique identifier for the user associated with the transaction."
+        data_type: integer
+        tests:
+          - not_null
+
+      - name: transaction_timestamp
+        description: "The timestamp when the transaction occurred."
+        data_type: timestamp
+        tests:
+          - not_null
+
+      - name: revenue
+        description: "The revenue generated from the transaction."
+        data_type: float
+        tests:
+          - not_null
+
+      - name: cost
+        description: "The cost associated with the transaction."
+        data_type: float
+        tests:
+          - not_null
+          

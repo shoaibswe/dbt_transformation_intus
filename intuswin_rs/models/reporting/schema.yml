@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: fct_monthly_sales_marketing_report
+    description: "This model provides a monthly report of sales and marketing metrics, including revenue, costs, and marketing events, grouped by year, month, and product category."
+    columns:
+      - name: transaction_year
+        description: "The year of the transaction."
+        data_type: integer
+        tests:
+          - not_null
+          - date_consistency:  #generic test for date consistency
+              start_date: '2023-01-01'
+              end_date: '2023-12-31'
+
+      - name: transaction_month
+        description: "The month of the transaction."
+        data_type: integer
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+      - name: category
+        description: "The category of the product associated with the transaction."
+        data_type: string
+        tests:
+          - not_null
+
+      - name: unique_customers
+        description: "The number of unique customers who made transactions in the given month and category."
+        data_type: integer
+        tests:
+          - not_null
+          - positive_values #generic test for positive values
+
+      - name: total_revenue
+        description: "The total revenue generated from transactions in the given month and category."
+        data_type: float
+        tests:
+          - not_null
+          - positive_values 
+
+      - name: total_cost
+        description: "The total cost associated with transactions in the given month and category."
+        data_type: float
+        tests:
+          - not_null
+          - positive_values 
+
+      - name: total_marketing_cost
+        description: "The total cost of marketing events in the given month."
+        data_type: float
+        tests:
+          - not_null
+          - positive_values 
+
+      - name: total_marketing_events
+        description: "The total number of marketing events in the given month."
+        data_type: integer
+        tests:
+          - not_null
+          - positive_values 
+
+      - name: revenue_to_cost_ratio
+        description: "The ratio of total revenue to total cost for the given month and category."
+        data_type: float
+        tests:
+          - not_null
+          - positive_values 
